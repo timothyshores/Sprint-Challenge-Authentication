@@ -48,13 +48,6 @@ class SignUp extends Component {
                         value={this.state.password}
                     />
                     <br />
-                    <label htmlFor="department">Department:</label>
-                    <input
-                        type="text"
-                        name="department"
-                        value={this.state.department}
-                        onChange={this.handleChange}
-                    />
                     <div>
                         <button type="submit">Submit</button>
                     </div>

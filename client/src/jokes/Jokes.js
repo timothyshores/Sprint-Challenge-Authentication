@@ -11,6 +11,7 @@ class Jokes extends React.Component {
         return (
             <>
                 <Reminder />
+                <h2>Dad Jokes</h2>
                 {this.state.jokes.map(joke => (
                     <p key={joke.id}>{joke.joke}</p>
                 ))}
@@ -21,7 +22,7 @@ class Jokes extends React.Component {
     componentDidMount() {
         const requestConfig = {
             headers: {
-                authorization: localStorage.getItem('Authorization'),
+                authorization: localStorage.getItem('authorization'),
             },
         };
         axios

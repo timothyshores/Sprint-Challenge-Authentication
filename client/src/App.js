@@ -20,7 +20,7 @@ function App(props) {
                 <h1>Sprint Challenge Authentication</h1>
                 <NavLink to="/jokes">Jokes</NavLink>
                 &nbsp; | &nbsp;
-                <NavLink to="/signup">Sign Up</NavLink>
+                <NavLink to="/register">Sign Up</NavLink>
                 &nbsp; | &nbsp;
                 <NavLink to="/login">Login</NavLink>
                 &nbsp; | &nbsp;
@@ -28,7 +28,7 @@ function App(props) {
             </header>
             <main>
                 <Route path="/jokes" component={Jokes} />
-                <Route path="/signup" component={SignUp} />
+                <Route path="/register" component={SignUp} />
                 <Route path="/login" component={Login} />
                 <Route exact path="/" component={Reminder} />
             </main>
