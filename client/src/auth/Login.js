@@ -18,7 +18,7 @@ class Login extends Component {
             .post('http://localhost:3300/api/login', this.state)
             .then(res => {
                 localStorage.setItem('authorization', res.data.token);
-                this.props.history.push('/users');
+                this.props.history.push('/jokes');
             })
             .catch(err => {
                 console.error('Unable to login', err);

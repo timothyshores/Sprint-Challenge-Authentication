@@ -20,7 +20,7 @@ class SignUp extends Component {
             .post('http://localhost:3300/api/register', this.state)
             .then(res => {
                 localStorage.setItem('authorization', res.data.token);
-                this.props.history.push('/users');
+                this.props.history.push('/jokes');
             })
             .catch(err => {
                 console.error('Unable to sign up', err);
