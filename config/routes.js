@@ -28,16 +28,30 @@ function register(req, res) {
                 res.status(500).json(error);
             });
     } else {
-        console.log('error');
-        console.log('user', user);
-        console.log('username', username);
-        console.log('password', password);
         res.status(500).json({ message: "User requires a username, password and department" });
     }
 }
 
 function login(req, res) {
-    // implement user login
+    let { username, password } = req.body;
+
+    Users.findBy({ username })
+        .first()
+        .then(user => {
+            if (user && bcrypt.compareSync(password, user.password)) {
+                const token = generateToken(user);
+                res.status(200).json({
+                    message: `Welcome ${user.username}!`,
+                    token,
+                });
+            } else {
+                res.status(401).json({ message: 'Invalid Credentials' });
+            }
+        })
+        .catch(error => {
+            console.log('error', error);
+            res.status(500).json(error);
+        });
 }
 
 function getJokes(req, res) {
