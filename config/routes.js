@@ -79,7 +79,7 @@ function generateToken(user) {
         expiresIn: '8h'
     }
 
-    const secret = 'Keep It Secret, Keep It Safe'
+    const secret = process.env.JWT_SECRET;
 
     return jwt.sign(payload, secret, options)
 }
