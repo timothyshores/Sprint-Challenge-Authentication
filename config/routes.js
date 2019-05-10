@@ -12,7 +12,28 @@ module.exports = server => {
 };
 
 function register(req, res) {
-    // implement user registration
+    let user = req.body;
+    let { username, password } = user;
+    const hash = bcrypt.hashSync(user.password, 12);
+    user.password = hash;
+
+    if (user && username && password) {
+        Users.add(user)
+            .then(saved => {
+                const token = generateToken(user);
+                res.status(201).json({ saved, token });
+            })
+            .catch(error => {
+                console.log(error);
+                res.status(500).json(error);
+            });
+    } else {
+        console.log('error');
+        console.log('user', user);
+        console.log('username', username);
+        console.log('password', password);
+        res.status(500).json({ message: "User requires a username, password and department" });
+    }
 }
 
 function login(req, res) {
@@ -32,4 +53,19 @@ function getJokes(req, res) {
         .catch(err => {
             res.status(500).json({ message: 'Error Fetching Jokes', error: err });
         });
+}
+
+function generateToken(user) {
+    const payload = {
+        subject: user.id,
+        username: user.username,
+    };
+
+    const options = {
+        expiresIn: '8h'
+    }
+
+    const secret = 'Keep It Secret, Keep It Safe'
+
+    return jwt.sign(payload, secret, options)
 }
